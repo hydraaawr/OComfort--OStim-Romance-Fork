@@ -39,20 +39,14 @@ endFunction
 
 bool Function CheckIfValidSpouse(actor[] acts)
     Actor li = LoveInterest.GetActorReference()
-    if (li == None)
+    int liArrPos = acts.Find(li)
+
+    if (li == None) || (liArrPos == -1)
         return false
+    else 
+        writelog(li)
+        return true
     endif
-    int len = acts.length
-    int i = 0
-    while i < Len
-        actor act = acts[i]
-        if (act == li)
-            writelog(act)
-            return true
-        endif
-        i += 1
-    endwhile
-    return false
 endFunction
 
 ; This just makes life easier sometimes.
