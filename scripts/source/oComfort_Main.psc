@@ -2,7 +2,6 @@ Scriptname oComfort_Main extends quest
 {Main logic of oComfort.}
 
 ; code
-
 Actor Property PlayerRef Auto  
 oComfort_MCM Property oCom_MCM Auto
 OsexIntegrationMain Property OStim Auto
@@ -32,7 +31,9 @@ Function applyLoversComfort()
         Utility.Wait(2.0)
     endWhile
     SleepQuest.RemoveRested()
-    SleepQuest.MarriageRestedMessage.Show()
+    if (oCom_MCM.oComfort_MessageOn)
+        Debug.Notification("You feel comforted by being with your lover.")
+    endif
     PlayerRef.AddSpell(SleepQuest.MarriageSleepAbility, abVerbose = false)
 endFunction
 
@@ -47,7 +48,6 @@ bool Function CheckIfValidSpouse(actor[] acts)
         actor act = acts[i]
         if (act == li)
             writelog(act)
-            Writelog("found spouse")
             return true
         endif
         i += 1
