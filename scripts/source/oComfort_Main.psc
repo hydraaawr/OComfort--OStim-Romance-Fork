@@ -3,11 +3,11 @@ Scriptname oComfort_Main extends quest
 
 ; code
 
-Actor Property PlayerRef  Auto  
+Actor Property PlayerRef Auto  
 oComfort_MCM Property oCom_MCM Auto
 OsexIntegrationMain Property OStim Auto
-ReferenceAlias property LoveInterest auto
-PlayerSleepQuestScript Property SleepQuest auto
+ReferenceAlias property LoveInterest Auto
+PlayerSleepQuestScript Property SleepQuest Auto
 
 
 Event OnInit()
@@ -28,20 +28,38 @@ Event OnOstimStart(string eventName, string strArg, float numArg, Form sender)
 endEvent
 
 Function applyLoversComfort()
+    While Ostim.AnimationRunning()
+        Utility.Wait(2.0)
+    endWhile
     SleepQuest.RemoveRested()
     SleepQuest.MarriageRestedMessage.Show()
     PlayerRef.AddSpell(SleepQuest.MarriageSleepAbility, abVerbose = false)
 endFunction
 
 bool Function CheckIfValidSpouse(actor[] acts)
+    Actor li = LoveInterest.GetActorReference()
+    if (li == None)
+        return false
+    endif
     int len = acts.length
     int i = 0
-    while i <= Len
+    while i < Len
         actor act = acts[i]
-        if (act == LoveInterest.GetActorReference())
+        if (act == li)
+            writelog(act)
+            Writelog("found spouse")
             return true
         endif
         i += 1
     endwhile
     return false
 endFunction
+
+; This just makes life easier sometimes.
+Function WriteLog(String OutputLog, bool error = false)
+    MiscUtil.PrintConsole("oComfort: " + OutputLog)
+    Debug.Trace("oComfort: " + OutputLog)
+    if (error == true)
+        Debug.Notification("oComfort: " + OutputLog)
+    endIF
+EndFunction
