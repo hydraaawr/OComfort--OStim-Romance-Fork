@@ -58,7 +58,7 @@ jobs:
 
     - name: Build releases
       run: |
-        .\pyro\pyro --game-path . --compiler-path ${Env:ppj_c} --flags-path ${Env:ppj_f} --access-token ${Env:ppj_t} -i .\repo\${Env:ppj_p}
+        .\pyro\pyro --game-path . --compiler-path ${Env:ppj_c} --flags-path ${Env:ppj_f} --access-token ${Env:ppj_t} .\repo\${Env:ppj_p}
       env: 
         ppj_c: compiler\PapyrusCompiler.exe
         ppj_f: compiler\TESV_Papyrus_Flags.flg
