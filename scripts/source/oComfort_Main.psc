@@ -10,10 +10,10 @@ PlayerSleepQuestScript Property SleepQuest Auto
 
 
 Event OnInit()
-    RegisterForModEvent("ostim_start", "OnOstimStart")
+    RegisterForModEvent("ostim_end", "OnOstimEnd")
 endEvent
 
-Event OnOstimStart(string eventName, string strArg, float numArg, Form sender)
+Event OnOstimEnd(string eventName, string strArg, float numArg, Form sender)
     if (oCom_MCM.oComfort_Enabled && Ostim.IsPlayerInvolved())
         actor[] acts = Ostim.GetActors()
         if (oCom_MCM.oComfort_SpouseOnly)
@@ -27,9 +27,6 @@ Event OnOstimStart(string eventName, string strArg, float numArg, Form sender)
 endEvent
 
 Function applyLoversComfort()
-    While Ostim.AnimationRunning()
-        Utility.Wait(2.0)
-    endWhile
     SleepQuest.RemoveRested()
     if (oCom_MCM.oComfort_MessageOn)
         Debug.Notification("You feel comforted by being with your lover.")
@@ -39,20 +36,14 @@ endFunction
 
 bool Function CheckIfValidSpouse(actor[] acts)
     Actor li = LoveInterest.GetActorReference()
-    if (li == None)
+    int liArrPos = acts.Find(li)
+
+    if (li == None) || (liArrPos == -1)
         return false
+    else 
+        writelog(li)
+        return true
     endif
-    int len = acts.length
-    int i = 0
-    while i < Len
-        actor act = acts[i]
-        if (act == li)
-            writelog(act)
-            return true
-        endif
-        i += 1
-    endwhile
-    return false
 endFunction
 
 ; This just makes life easier sometimes.
