@@ -16,7 +16,6 @@ Adds the ability to gain the "Lovers Comfort" buff from having sex with your spo
 
 ## Future Plans
 
-- Compatibility with oRomance.
 - Ability to manually define a specific NPC as your Spouse.
 
 ## Contributing
