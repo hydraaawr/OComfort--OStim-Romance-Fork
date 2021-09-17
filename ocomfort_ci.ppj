@@ -11,7 +11,7 @@
         <Variable Name="ModName" Value="oComfort"/>
         <Variable Name="MyProject" Value="."/>
         <Variable Name="Dist" Value="../Dist"/>
-        <Variable Name="Version" Value="1.1"/>
+        <Variable Name="Version" Value="1.2"/>
     </Variables>
     <Imports>
         <Import>@MyProject\Scripts\Source</Import>
@@ -19,7 +19,7 @@
         <Import>https://github.com/eeveelo/PapyrusUtil/tree/master/Scripts/Source</Import>
         <Import>https://github.com/MrOctopus/nl_mcm/tree/main/main/scripts/source</Import>
         <Import>https://github.com/MrOctopus/nl_util/tree/main/dist/scripts/source</Import>
-	<Import>https://github.com/MrOctopus/nl_mcm/tree/main/main/scripts/source</Import>
+        <Import>https://github.com/MrOctopus/nl_mcm/tree/main/main/scripts/source</Import>
         <Import>https://github.com/Sairion350/OCum/tree/main/scripts/source</Import>
         <Import>https://github.com/Sairion350/OStim/tree/main/Scripts/Source</Import>
         <Import>https://github.com/CE0/OSA-SE/tree/master/Data/Scripts/Source</Import>
@@ -33,7 +33,7 @@
     </Scripts>
     <ZipFiles Output="@Dist">
         <ZipFile Name="@ModName @Version" RootDir="@MyProject" Compression="deflate">
-            <Match>*.pex|*.psc|*.esp|</Match>
+            <Match Exclude="nl_mcm*">*.pex|*.psc|*.esp|</Match>
         </ZipFile>
     </ZipFiles>
 </PapyrusProject>

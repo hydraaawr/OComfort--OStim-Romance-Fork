@@ -1,0 +1,2 @@
+changelog
+1.2 - Removed NL_MCM redists from mod, as it's now on Nexus.

@@ -8,6 +8,7 @@ Adds the ability to gain the "Lovers Comfort" buff from having sex with your spo
 
 - Skyrim: Special Edition (1.5.39+)
 - [Ostim SE](https://github.com/Sairion350/OStim) (and all its' requirements.)
+- [NL_MCM](https://www.nexusmods.com/skyrimspecialedition/mods/49127)
 
 ## Install Instructions
 
