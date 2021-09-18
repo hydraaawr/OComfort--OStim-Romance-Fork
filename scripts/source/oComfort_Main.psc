@@ -36,16 +36,11 @@ endFunction
 
 bool Function CheckIfValidSpouse(actor[] acts)
     Actor li
-    writelog(oCom_MCM.spouseManual.GetBaseObject().getname())
-    writelog(LoveInterest.GetActorReference().GetBaseObject().getname())
     if (oCom_MCM.oComfort_Manual_Define && oCom_MCM.spouseManual)
-        writelog(1)
         li = oCom_MCM.spouseManual
     else
-        writelog(2)
         li = LoveInterest.GetActorReference()
     endif
-    writelog(li.GetBaseObject().getname())
 
     int liArrPos = acts.Find(li)
 
@@ -63,7 +58,7 @@ endFunction
 
 Event OnMenuClose(String MenuName)
     if (MenuName == "Journal Menu")
-        Outils.DisplayToastText("Hover over your Spouse and press ["+Outils.KeycodeToKey(oCom_MCM.oComfort_Manual_Keymap) +"] to select them.", 3.5)
+        Outils.DisplayToastText("Hover your crosshair over your Spouse and press ["+Outils.KeycodeToKey(oCom_MCM.oComfort_Manual_Keymap) +"] to select them.", 3.5)
         UnRegisterForMenu("Journal Menu")
     endif
 endEvent

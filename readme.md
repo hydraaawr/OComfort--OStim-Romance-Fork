@@ -14,10 +14,11 @@ Adds the ability to gain the "Lovers Comfort" buff from having sex with your spo
 
 1. Install Ostim SE and all of its' requirements.
 2. Install OComfort and place __lower__ than Ostim in your plugin load order.
+3. Install NL_MCM and place it at the bottom of your load order, it should always win all conflicts.
 
 ## Future Plans
 
-- Ability to manually define a specific NPC as your Spouse.
+- If you sleep in a bed nearby to your spouse / in your house? a scene will start automatically.
 
 ## Contributing
 

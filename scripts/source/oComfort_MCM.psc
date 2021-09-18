@@ -40,11 +40,6 @@ function startup()
         debug.MessageBox("Your OStim version is out of date. OComfort requires a newer version")
         return 
     endif
-
-    if (!MiscUtil.FileExists("data/scripts/nl_mcm.pex"))
-        Debug.MessageBox("NL_MCM is not installed. Please install it to use OComfort")
-        return
-    endif 
 endFunction
 
 int function getVersion()
@@ -52,7 +47,7 @@ int function getVersion()
 endFunction
 
 event OnVersionUpdate(int a_version)
-    if (CurrentVersion < a_version)
+    if (a_version >= 1)
         startup()
         Writelog("Version change detected, scripts updated.", true)
     endif
@@ -128,9 +123,6 @@ endstate
 state oComfort_Manual_State
     event OnSelectST(string state_id)
         oComfort_Manual_Define = !oComfort_Manual_Define
-        ;if (!oComfort_Manual_Keymap)
-        ;    oComfort_Manual_Keymap = 35
-        ;endif
         ForcePageReset()
     endevent
 
@@ -152,7 +144,7 @@ endstate
 
 state oComfort_Enter_Selection_State
     event OnHighlightST(string state_id)
-        SetInfoText("Enter Spouse selection mode, look at any NPC and press the spouse keybind above to select them as your spouse. \n Once you select an NPC, this mode disables and if you select the wrong NPC you'll need to enable it here again.")
+        SetInfoText("Enter Spouse selection mode, look at any NPC and press the ["+Outils.KeycodeToKey(oComfort_Manual_Keymap)+"] key to select them as your spouse. \n Once you select an NPC, this mode disables and if you select the wrong NPC you'll need to enable it here again.")
     endEvent
 
     event OnSelectST(string state_id)
@@ -161,10 +153,9 @@ state oComfort_Enter_Selection_State
 endstate
 
 function handleManual()
-    Debug.Messagebox("Exit the MCM and press ["+Outils.KeycodeToKey(oComfort_Manual_Keymap)+"] to select your spouse.")
     selectionModeEnabled = true
     main.EnterSelectionMode()
-    ForcePageReset()
+    CloseMCM(true)
 endFunction
 
 string function getSpouseName()
