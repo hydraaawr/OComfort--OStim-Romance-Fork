@@ -3,3 +3,9 @@ changelog
  - CHANGE: Added the ability to manually define your spouse, rather than only pull from the vanilla marriage script.
  - FIX: Removed NL_MCM redists from mod, as it's now on Nexus.
  - FIX: Fixed the mod update system, and made it so future updates should be save safe (in theory.)
+
+1.1
+ - OPTIMIZATION: Misc script fixes and optimizations (Thanks Sai <3)
+
+1.0
+ - MAIN: Initial Release.
