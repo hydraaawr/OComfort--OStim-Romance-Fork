@@ -14,7 +14,7 @@ jobs:
       matrix:
       # Set the project file paths relative to the current repo
         project-path:
-        - 'ocomfort_ci.ppj'
+        - 'ocomfort.ppj'
         
     env:
       # Set these
