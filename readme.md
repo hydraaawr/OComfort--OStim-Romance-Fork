@@ -1,1 +1,1 @@
-https://www.nexusmods.com/skyrimspecialedition/mods/107671
+https://www.nexusmods.com/skyrimspecialedition/mods/139333
