@@ -28,7 +28,7 @@ endEvent
 function startup()
     OUtils.RegisterForOUpdate(self)
     oComfort_Enabled = true
-    oComfort_SpouseOnly = true
+    oComfort_SpouseOnly = false
     oComfort_MessageOn = true
     oComfort_Manual_Define = false
     oComfort_Manual_Keymap = 35
