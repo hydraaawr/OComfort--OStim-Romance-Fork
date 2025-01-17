@@ -107,10 +107,3 @@ Function WriteLog(String OutputLog, bool error = false)
         Debug.Notification("oComfort: " + OutputLog)
     endIF
 EndFunction
-
-
-
-; Function AnimationPlayedGetter()
-;     int CurrentAnimation = (AnimationPlayedRef as IOSS_SceneInteractions).AnimationPlayed
-;     Debug.Notification("Animation Played: " + CurrentAnimation)
-; EndFunction
