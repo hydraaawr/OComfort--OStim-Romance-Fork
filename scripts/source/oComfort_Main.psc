@@ -7,21 +7,45 @@ oComfort_MCM Property oCom_MCM Auto
 OsexIntegrationMain Property OStim Auto
 ReferenceAlias property LoveInterest Auto
 PlayerSleepQuestScript Property SleepQuest Auto
+IOSS_SceneInteractions Property IOSS Auto
+Int Property CurrentAnimation auto
 
 Event OnInit()
     RegisterForModEvent("ostim_end", "OnOstimEnd")
+    RegisterForModEvent("ostim_start", "OstimStart")
 endEvent
 
+
+; OStim Romance Fork Addition ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+Event OStimStart(string eventName, string strArg, float numArg, Form sender) ;Save AnimationPlayed for later evaluation
+    
+    ;Debug.Notification("Ostim scene started")
+    CurrentAnimation = IOSS.AnimationPlayed
+    ;Debug.Notification("CurrentAnimation = " + CurrentAnimation)
+    
+EndEvent
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+
 Event OnOstimEnd(string eventName, string strArg, float numArg, Form sender)
-    if (oCom_MCM.oComfort_Enabled && Ostim.IsPlayerInvolved())
-        actor[] acts = Ostim.GetActors()
-        if (oCom_MCM.oComfort_SpouseOnly)
-            if (CheckIfValidSpouse(acts))
+
+    
+    if (CurrentAnimation == 0 || CurrentAnimation == 5 || CurrentAnimation == 7) ; Evaluates Current Animation (OStim Romance Fork)
+        if (oCom_MCM.oComfort_Enabled && Ostim.IsPlayerInvolved())
+            actor[] acts = Ostim.GetActors()
+            if (oCom_MCM.oComfort_SpouseOnly)
+                if (CheckIfValidSpouse(acts))
+                    applyLoversComfort()
+                endif
+            Else
                 applyLoversComfort()
             endif
-        Else
-            applyLoversComfort()
         endif
+    ; Else
+    ;     Debug.Notification("Not a sex/succesful sex scene") DEBUG
     endif
 endEvent
 
@@ -83,3 +107,10 @@ Function WriteLog(String OutputLog, bool error = false)
         Debug.Notification("oComfort: " + OutputLog)
     endIF
 EndFunction
+
+
+
+; Function AnimationPlayedGetter()
+;     int CurrentAnimation = (AnimationPlayedRef as IOSS_SceneInteractions).AnimationPlayed
+;     Debug.Notification("Animation Played: " + CurrentAnimation)
+; EndFunction
