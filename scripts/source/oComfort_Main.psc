@@ -7,21 +7,25 @@ oComfort_MCM Property oCom_MCM Auto
 OsexIntegrationMain Property OStim Auto
 ReferenceAlias property LoveInterest Auto
 PlayerSleepQuestScript Property SleepQuest Auto
-IOSS_SceneInteractions Property IOSS Auto
+IOSS_SceneInteractions Property IOSS_Scene Auto
+IOSS_Relationship Property IOSS_Rel auto
 Int Property CurrentAnimation auto
+Int Property CUrrentQuery auto
 
 Event OnInit()
+
     RegisterForModEvent("ostim_end", "OnOstimEnd")
     RegisterForModEvent("ostim_start", "OstimStart")
+
 endEvent
 
 
-; OStim Romance Fork Addition ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; OStim Romance Fork System Addition ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 Event OStimStart(string eventName, string strArg, float numArg, Form sender) ;Save AnimationPlayed for later evaluation
     
     ;Debug.Notification("Ostim scene started")
-    CurrentAnimation = IOSS.AnimationPlayed
+    CurrentAnimation = IOSS_Scene.AnimationPlayed
     ;Debug.Notification("CurrentAnimation = " + CurrentAnimation)
     
 EndEvent
@@ -32,8 +36,10 @@ EndEvent
 
 Event OnOstimEnd(string eventName, string strArg, float numArg, Form sender)
 
-    
-    if (CurrentAnimation == 0 || CurrentAnimation == 5 || CurrentAnimation == 7) ; Evaluates Current Animation (OStim Romance Fork)
+    CurrentQuery = IOSS_Rel.Query
+    ;Debug.Notification("CurrentQuery = " + IOSS_Rel.Query)
+
+    if ((CurrentAnimation == 0 && (CurrentQuery == 0 || CurrentQuery == 4 || CurrentQuery ==  6 || CurrentQuery == 8)) || CurrentAnimation == 5 || CurrentAnimation == 7) ; Evaluates Current Animation and Dialogue (OStim Romance Fork)
         if (oCom_MCM.oComfort_Enabled && Ostim.IsPlayerInvolved())
             actor[] acts = Ostim.GetActors()
             if (oCom_MCM.oComfort_SpouseOnly)
